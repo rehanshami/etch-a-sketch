@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+width: 520px;
+height: 520px;
+display: flex;
+flex-wrap: wrap;
+}
+
+.grid-square {
+    background-color: lightgray;
+    border: 1px solid gray;
+    flex-grow: 1;
+    flex-basis: 0;
+    flex-wrap: wrap;
+}
