@@ -10,6 +10,7 @@ const container = document.querySelector(".container");
             container.appendChild(row);
           }
         }
+        addButtonListener();
         addHoverListener();
       }
       makeGrid(num);
@@ -18,6 +19,17 @@ const container = document.querySelector(".container");
 // Leaving a pixelated trail through your grid like a pen
 // Hovering is mouse enters a div amd when it leaves it
 // adding class to the div
+
+// Adding button listener
+function addButtonListener () {
+  const randomButton = document.querySelector(".random-rgb");
+  randomButton.addEventListener("click", randomRGB);
+  const divs = document.querySelectorAll(".grid-square");
+  divs.forEach((div) => {
+    div.addEventListener("mouseover", randomRGB);
+  });
+}
+
 
 // Function to listen for hovers over div squares
 function addHoverListener () {
@@ -61,9 +73,17 @@ function clearGrid () {
   }
 }
 
-// Once entered, the existing grid should be removed and a new grid should be 
-// generated in the same total space as before (e.g. 960px wide) so that you’ve got a new sketch pad. 
-// Research button tags in HTML and how you can make a JavaScript function run when one is clicked.
-// Also check out prompts.
-// You should be able to enter 64 and have a brand new 64x64 grid pop up without changing the total 
-// amount of pixels used.
+// Instead of just changing the color of a square from black to white (for example), 
+// have each pass through with the mouse change it to a completely random RGB value. 
+// Then try having each pass just add another 10% of black to it so that only after 
+// 10 passes is the square completely black.
+
+// Create function to generate a random color each time it passes a div
+function randomRGB() {
+  const red = Math.floor(Math.random() * 256);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
+  const randomColor = `rgb(${red}, ${green}, ${blue})`;
+  this.style.backgroundColor = randomColor; 
+
+}
