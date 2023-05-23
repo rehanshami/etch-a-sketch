@@ -1,5 +1,27 @@
+
 const num = 16;
 const container = document.querySelector(".container");
+
+// Define a variable to store the selected color
+let currentColor = "aqua";
+
+// Add event listeners to the color buttons
+const blackButton = document.querySelector("#black-btn");
+blackButton.addEventListener("click", () => {
+  currentColor = "black";
+});
+
+const aquaButton = document.querySelector("#aqua-btn");
+aquaButton.addEventListener("click", () => {
+  currentColor = "aqua";
+});
+
+const randomButton = document.querySelector("#random-rgb-btn");
+randomButton.addEventListener("click", () => {
+  console.log(currentColor);
+  currentColor = "random";
+});
+
 
       function makeGrid(num) {
         container.style.setProperty('--num', num);
@@ -10,8 +32,7 @@ const container = document.querySelector(".container");
             container.appendChild(row);
           }
         }
-        addButtonListener();
-        addHoverListener();
+        applyColorToGrid();
       }
       makeGrid(num);
 
@@ -21,32 +42,36 @@ const container = document.querySelector(".container");
 // adding class to the div
 
 // Adding button listener
-function addButtonListener () {
-  const randomButton = document.querySelector(".random-rgb");
-  randomButton.addEventListener("click", randomRGB);
-  const divs = document.querySelectorAll(".grid-square");
-  divs.forEach((div) => {
-    div.addEventListener("mouseover", randomRGB);
+
+
+// Function to apply the selected color on hover
+function applyColorToGrid() {
+  const gridSquares = document.querySelectorAll(".grid-square");
+
+  gridSquares.forEach((square) => {
+    square.addEventListener("mouseover", () => {
+      if (currentColor === "random") {
+        square.style.backgroundColor = generateRandomColor();
+      } else {
+        square.style.backgroundColor = currentColor;
+      }
+    });
   });
 }
 
 
-// Function to listen for hovers over div squares
-function addHoverListener () {
-  const divs = document.querySelectorAll(".grid-square");
-  divs.forEach((div) => {
-      div.addEventListener("mouseover", changeColor);
-    });
+// Function to generate a random color
+function generateRandomColor() {
+  const red = Math.floor(Math.random() * 256);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
+  color = `rgb(${red}, ${green}, ${blue})`;
+  console.log(color);
+  return color;
 }
 
-    
-    function changeColor() {
-        this.classList.add("grid-color-change");
-    }
-    
-    function revertColor() {
-        this.classList.remove("grid-color-change");
-    }
+// Call the applyColorToGrid() function to apply the color on hover
+applyColorToGrid();
 
 
 // Add a button to the top of the screen that will send the user a popup asking for the number of squares 
@@ -79,11 +104,3 @@ function clearGrid () {
 // 10 passes is the square completely black.
 
 // Create function to generate a random color each time it passes a div
-function randomRGB() {
-  const red = Math.floor(Math.random() * 256);
-  const green = Math.floor(Math.random() * 256);
-  const blue = Math.floor(Math.random() * 256);
-  const randomColor = `rgb(${red}, ${green}, ${blue})`;
-  this.style.backgroundColor = randomColor; 
-
-}

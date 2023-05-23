@@ -2,7 +2,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    
     margin: 0;
     flex-direction: column;
 }
@@ -12,15 +12,15 @@ h1 {
 }
 
 button {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .container {
-    margin-bottom: 40px;
+    margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(var(--num), 1fr);
-    width: 520px;
-    height: 520px;
+    width: 450px;
+    height: 450px;
 
 }
 
